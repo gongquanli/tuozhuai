@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			#hm {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 200px;
+				width: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<img src="img/1.jpg" id="hm" />
+	</body>
+	<script>
+		var mm = document.getElementById("hm");
+		//		获取拖拽的对象
+		//mm.onclick = function(e) {
+		//	onclick 在单击（单击、松手）的时候
+		mm.onmousedown = function(e) {
+			//	onmousedown 在鼠标按下的时候
+			//	点击物体
+			e.preventDefault();
+			//	关闭流浪器的默认拖拽
+			var xx = e.offsetX;
+			var yy = e.offsetY;
+			//	鼠标在物体中点击的位置
+			document.onmousemove = function(e) {
+				//	开始跟着鼠标走
+				var x = e.clientX - xx;
+				var y = e.clientY - yy;
+				//	鼠标位置
+				mm.style.left = x + "px";
+				mm.style.top = y + "px";
+				//	获取图片地址
+				document.onmouseup = function() {
+					// 停止移动
+					document.onmousemove = null;
+					//	不让图片跟着鼠标位置
+				}
+			}
+		}
+	</script>
+
+</html>

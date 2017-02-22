@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#monkey{
+				position:absolute;
+				left: 0;
+				top:0;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="img/1.gif" id="monkey" />	
+	</body>
+	<script>		
+		var om = document.getElementById("monkey");
+		om.onmousedown = function(e){
+			var arr = [];
+			//	申请一个新的空间，用于存储所有的坐标
+			om.src="img/2.gif";
+			e.preventDefault();
+			document.onmousemove = function(e){
+				var p ={};
+				p.x = e.clientX;
+				p.y = e.clientY;
+					//	定义一个坐标，保存当前鼠标的x和y值
+				arr.push(p);
+				
+				console.log(e.clientX,e.clientY);
+				om.style.left = e.clientX + "px";
+				om.style.top = e.clientY + "px";
+			}
+			document.onmouseup = function(){
+//				om.src="img/1.gif";
+				var i = 0; // 第一个从0开始的
+				setInterval(function(){
+					var x = arr[i].x;
+					var y = arr[i].y;
+					//	取出队列中的点
+					om.style.left = x + "px";
+					om.style.top = y + "px";
+					i++; //	取向下一个点
+				},10);
+				document.onmousemove = null;
+			}
+		}
+	</script>
+</html>
